@@ -2,31 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Car;
 use App\Models\AbstractClass;
+use App\Models\Car;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class CarsController extends Controller
+class CarsController extends AbstractController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
         $cars = Car::latest()->paginate(5);
 
 
-        return view('cars.index',compact('cars'))
-
+        return view('cars.index', compact('cars'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -36,8 +37,8 @@ class CarsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -49,47 +50,46 @@ class CarsController extends Controller
 
         ]);
 
-    
 
         Car::create($request->all());
 
-     
 
         return redirect()->route('cars.index')
-
-                        ->with('success','Car created successfully.');
+            ->with('success', 'Car created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
+     * @param AbstractClass $car
+     * @return Response
      */
-    public function show(Car $car)
+    public function show($car)
     {
-        return view('cars.show',compact('car'));
+        $car = with(new Car())->find($car);
+        return view('cars.show')->with('car', $car);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
+     * @param AbstractClass $car
+     * @return Response
      */
-    public function edit(Car $car)
+    public function edit($car)
     {
-        return view('cars.edit',compact('car'));
+        $car = with(new Car())->find($car);
+        return view('cars.edit')->with('car', $car);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param AbstractClass $car
+     * @return Response
      */
-    public function update(Request $request, Car $car)
+    public function update(Request $request, $car)
     {
         $request->validate([
 
@@ -99,31 +99,27 @@ class CarsController extends Controller
 
         ]);
 
-    
 
         $car->update($request->all());
 
-    
 
         return redirect()->route('cars.index')
-
-                        ->with('success','Car updated successfully');
+            ->with('success', 'Car updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
+     * @param AbstractClass $car
+     * @return Response
      */
-    public function destroy(Car $car)
+    public function destroy($car)
     {
+        $car = with(new Car())->find($car);
         $car->delete();
 
-    
 
         return redirect()->route('cars.index')
-
-                        ->with('success','Car deleted successfully');
+            ->with('success', 'Car deleted successfully');
     }
 }

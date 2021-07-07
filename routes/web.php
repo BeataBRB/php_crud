@@ -24,5 +24,5 @@ Route::get('/', function () {
 Route::resource('products', ProductController::class);
 Route::resource('cars', CarsController::class);
 Route::resource('houses', HouseController::class);
-Route::get('/', 'AbstractClassController@index');
+
 

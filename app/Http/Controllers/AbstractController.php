@@ -5,23 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\AbstractClass;
 use Illuminate\Http\Request;
 
-class AbstractController extends Controller
+abstract class AbstractController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * 
+     *  @return Response
      */
     public function index()
     {
-        $powitanie ="Witaj w aplikacji Beaty";
-        return view('/', ['powitanie' => $powitanie]);
+       
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
+     * 
      */
     public function create()
     {
@@ -31,8 +32,8 @@ class AbstractController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -42,10 +43,11 @@ class AbstractController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AbstractClass  $abstractClass
-     * @return \Illuminate\Http\Response
+     * 
+     *  @param AbstractClass $abstractClass
+     * @return Response
      */
-    public function show(AbstractClass $abstractClass)
+    public function show($abstractClass)
     {
         //
     }
@@ -53,10 +55,10 @@ class AbstractController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\AbstractClass  $abstractClass
-     * @return \Illuminate\Http\Response
+     *  @param AbstractClass $abstractClass
+     * @return Response
      */
-    public function edit(AbstractClass $abstractClass)
+    public function edit($abstractClass)
     {
         //
     }
@@ -64,22 +66,22 @@ class AbstractController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\AbstractClass  $abstractClass
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param AbstractClass $abstractClass
+     * @return Response
      */
-    public function update(Request $request, AbstractClass $abstractClass)
+    public function update(Request $request, $abstractClass)
     {
         //
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\AbstractClass  $abstractClass
-     * @return \Illuminate\Http\Response
+     * 
+     * @param AbstractClass $abstractClass
+     * @return Response
      */
-    public function destroy(AbstractClass $abstractClass)
+    public function destroy($abstractClass)
     {
         //
     }

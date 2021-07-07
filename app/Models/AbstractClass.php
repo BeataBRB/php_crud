@@ -9,7 +9,8 @@ abstract class AbstractClass extends Model
 {
     use HasFactory;
 
-    
-    abstract public function getWelcome();
+    public static function getWelcome() {
+        return "Jesteś w klasie: ". get_called_class();
+    }
     
 }

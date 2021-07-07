@@ -2,28 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AbstractClass;
 use App\Models\House;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class HouseController extends Controller
+class HouseController extends AbstractController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
         $houses = House::latest()->paginate(5);
   
-        return view('houses.index',compact('houses'))
+        return view('houses.index', compact('houses'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -33,8 +36,8 @@ class HouseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -46,40 +49,43 @@ class HouseController extends Controller
         House::create($request->all());
    
         return redirect()->route('houses.index')
-                        ->with('success','House created successfully.');
+            ->with('success','House created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\House  $house
-     * @return \Illuminate\Http\Response
+     * @param AbstractClass $house
+     * @return Response
      */
-    public function show(House $house)
+    public function show($house)
     {
-        return view('houses.show',compact('house'));
+        $house = with(new House())->find($house);
+        return view('houses.show')->with('house', $house);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\House  $house
-     * @return \Illuminate\Http\Response
+     * @param AbstractClass $house
+     * @return Response
      */
-    public function edit(House $house)
+    public function edit($house)
     {
-        return view('houses.edit',compact('house'));
+        $house = with(new House())->find($house);
+        return view('houses.edit')->with('house', $house);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\House  $house
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param AbstractClass $house
+     * @return Response
      */
-    public function update(Request $request, House $house)
+    public function update(Request $request, $house)
     {
+        $house = with(new House())->find($house);
         $request->validate([
             'adres' => 'required',
             'wlasciciel' => 'required',
@@ -88,20 +94,21 @@ class HouseController extends Controller
         $house->update($request->all());
   
         return redirect()->route('houses.index')
-                        ->with('success','House updated successfully');
+            ->with('success','House updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\House  $house
-     * @return \Illuminate\Http\Response
+     * @param AbstractClass $house
+     * @return Response
      */
-    public function destroy(House $house)
+    public function destroy($house)
     {
+        $house = with(new House())->find($house);
         $house->delete();
   
         return redirect()->route('houses.index')
-                        ->with('success','House deleted successfully');
+            ->with('success','House deleted successfully');
     }
 }
