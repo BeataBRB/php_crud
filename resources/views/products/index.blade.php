@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
+        <div class="shadow-lg p-3 mb-5 bg-body rounded">
             <p class="font-monospace">{{ \App\Models\Product::getWelcome() }}</p>  
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Product</a>
             </div>
-        </div>
     </div>
 
    
@@ -21,7 +21,7 @@
 
     @endif
 
-    <table class="table">
+    <table class="table table-sm">
         <thead class="table-light">
             <tr>
                 <th scope="col">No</th>
