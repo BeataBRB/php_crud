@@ -8,4 +8,5 @@ class House extends AbstractClass
     protected $fillable = [
         'adres', 'wlasciciel'
       ];
+
 }

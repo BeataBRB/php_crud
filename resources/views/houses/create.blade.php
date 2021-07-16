@@ -1,47 +1,52 @@
-@extends('houses.layout')
-  
-@section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Create New house</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('houses.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
-   
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Warning!</strong> Please check your input code<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-   
-<form action="{{ route('houses.store') }}" method="POST">
-    @csrf
-     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Adres:</strong>
-                <input type="text" name="adres" class="form-control" placeholder="adres">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Create New House') }}</h2>    
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+
+                    <div class="pull-left">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight"> Add New Houses</h2>
+                    </div>
+
+                    <div class="flex items-center justify-end mt-4">
+                        <x-button>
+                            <a href="{{ route('houses.index') }}">Back</a>
+                        </x-button>
+                    </div>
+                    
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    <x-success-message />
+                    
+                    <form action="{{ route('houses.store') }}" method="POST">
+                        @method ('POST')
+                        @csrf
+
+                        <div class="grid grid-rows-2 gap-6">
+                            <div class="form-group">
+                                <x-label for="adres" :value="__('Adres')" />
+                                <x-input id="adres" class="block mt-1 w-full"
+                                         type="text"
+                                         name="adres"/>
+                            </div>
+                            <div class="form-group">
+                                <x-label for="wlasciciel" :value="__('Wlasciciel')" />
+                                <x-input id="wlasciciel" class="block mt-1 w-full"
+                                         type="text"
+                                         name="wlasciciel"/>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-end mt-4">                                           
+                            <x-button class="py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75">
+                            {{ __('Create') }}
+                            </x-button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>wlasciciel:</strong>
-                <textarea class="form-control" style="height:280px" name="wlasciciel" placeholder="wlasciciel"></textarea>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
-   
-</form>
-@endsection
+    </div>    
+</x-app-layout>

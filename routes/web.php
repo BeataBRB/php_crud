@@ -5,7 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\HouseController;
 use App\Http\Controllers\AbstractClassController;
-;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +20,21 @@ use App\Http\Controllers\AbstractClassController;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('welcome');
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+        })->name('dashboard');
+
+        Route::view('profile', 'profile')->name('profile');
+        Route::put('profile', [ProfileController::class, 'update'])
+            ->name('profile.update');
+
+    Route::resource('products', ProductController::class);
+    Route::resource('cars', CarsController::class);
+    Route::resource('houses', HouseController::class);
+
 });
-Route::resource('products', ProductController::class);
-Route::resource('cars', CarsController::class);
-Route::resource('houses', HouseController::class);
 
-
+require __DIR__.'/auth.php';

@@ -55,7 +55,7 @@ class CarsController extends AbstractController
 
 
         return redirect()->route('cars.index')
-            ->with('success', 'Car created successfully.');
+            ->with('message', 'Car created successfully.');
     }
 
     /**
@@ -91,20 +91,16 @@ class CarsController extends AbstractController
      */
     public function update(Request $request, $car)
     {
+        $car = with(new Car())->find($car);
         $request->validate([
-
             'brand' => 'required',
-
             'production' => 'required',
-
         ]);
-
 
         $car->update($request->all());
 
-
         return redirect()->route('cars.index')
-            ->with('success', 'Car updated successfully');
+            ->with('message', 'Car updated successfully');
     }
 
     /**
@@ -120,6 +116,6 @@ class CarsController extends AbstractController
 
 
         return redirect()->route('cars.index')
-            ->with('success', 'Car deleted successfully');
+            ->with('message', 'Car deleted successfully');
     }
 }

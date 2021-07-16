@@ -49,7 +49,7 @@ class HouseController extends AbstractController
         House::create($request->all());
    
         return redirect()->route('houses.index')
-            ->with('success','House created successfully.');
+            ->with('message','House created successfully.');
     }
 
     /**
@@ -94,7 +94,7 @@ class HouseController extends AbstractController
         $house->update($request->all());
   
         return redirect()->route('houses.index')
-            ->with('success','House updated successfully');
+            ->with('message','House updated successfully');
     }
 
     /**
@@ -109,6 +109,6 @@ class HouseController extends AbstractController
         $house->delete();
   
         return redirect()->route('houses.index')
-            ->with('success','House deleted successfully');
+            ->with('message','House deleted successfully');
     }
 }
