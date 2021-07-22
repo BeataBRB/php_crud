@@ -1,10 +1,12 @@
-<x-app-layout>
-    <x-slot name="header">
+@extends('layouts.app')
+
+    @section('header')
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Edit Car') }}
         </h2>
-    </x-slot>
+    @endsection
    
+    @section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -20,7 +22,7 @@
                         </x-button>
                     </div>
    
-                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    @include('components.auth-validation-errors')
                                 
                     <form action="{{ route('cars.update',$car->id) }}" method="POST">
 
@@ -48,4 +50,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+    @endsection

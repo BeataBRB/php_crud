@@ -4,12 +4,9 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('welcome') }}">
-                        <img class="block h-10 w-auto fill-current text-gray-600" src="{{ asset('assets/img/image.png') }}" alt="..." />
-                    </a>
-                </div>
-
+                
+                <x-application-logo class="block h-10 w-auto fill-current text-gray-600"/>
+                
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
