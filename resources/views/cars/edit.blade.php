@@ -1,10 +1,4 @@
-@extends('layouts.app')
-
-    @section('header')
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Car') }}
-        </h2>
-    @endsection
+@extends('layouts.app', ['nazwaModulu' => 'Tabela Car'])
    
     @section('content')
     <div class="py-12">

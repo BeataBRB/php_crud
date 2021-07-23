@@ -17,10 +17,11 @@ class CarsController extends AbstractController
      */
     public function index()
     {
+        
         $cars = Car::latest()->paginate(5);
 
 
-        return view('cars.index', compact('cars'))
+        return view('cars.index', compact('cars'),)
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -31,6 +32,7 @@ class CarsController extends AbstractController
      */
     public function create()
     {
+        
         return view('cars.create');
     }
 

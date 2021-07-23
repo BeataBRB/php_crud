@@ -1,10 +1,4 @@
-@extends('layouts.app')
-
-    @section('header')
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('My Profile') }}
-        </h2>
-    @endsection
+@extends('layouts.app', ['nazwaModulu' => 'My Profile'])
 
     @section('content')
     <div class="py-12">

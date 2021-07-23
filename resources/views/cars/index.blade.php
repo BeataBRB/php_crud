@@ -1,10 +1,4 @@
-@extends('layouts.app')
-
-
-    @section('header')
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('Tabela') }}</h2>    
-    @endsection
-
+@extends('layouts.app', ['nazwaModulu' => 'Tabela Car'])
 
     @section('content')
     <div class="py-12">
@@ -13,10 +7,10 @@
                 <div class="p-6 bg-white border-b border-gray-200">     
 
                     <div class="shadow-lg p-3 mb-5 bg-body rounded">
-                        <p class="font-semibold text-xl text-gray-800 leading-tight">{{ \App\Models\Product::getWelcome() }} Cars</p>         
+                        <p class="font-semibold text-xl text-gray-800 leading-tight">{{ \App\Models\Car::getWelcome() }} Cars</p>         
                     </div>
                             
-                    @include('components.success-message')
+                    <x-success-message />
 
                     <div class="flex items-center justify-end mt-4">                                           
                         <button class="py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75">

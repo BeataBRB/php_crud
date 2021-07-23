@@ -13,5 +13,7 @@ abstract class AbstractClass extends Model
         return "Tabela ";
         //. get_called_class();
     }
+
+   
     
 }
